@@ -27,6 +27,9 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef IFOPT_SRC_IFOPT_IPOPT_INCLUDE_IFOPT_IPOPT_H_
 #define IFOPT_SRC_IFOPT_IPOPT_INCLUDE_IFOPT_IPOPT_H_
 
+//TODO: proper import for include dir
+//#include <IpReturnCodes.hpp>
+
 #include <ifopt/problem.h>
 #include <ifopt/solver.h>
 
@@ -64,8 +67,14 @@ public:
   void SetOption(const std::string& name, int value);
   void SetOption(const std::string& name, double value);
 
+  /** Get ipopt AplicationReturnStatus of the last operation.
+   * https://www.coin-or.org/Ipopt/documentation/node36.html
+   */
+  int /*Ipopt::ApplicationReturnStatus*/ getIpoptExitStatus() { return status_; }
+
 private:
   std::shared_ptr<Ipopt::IpoptApplication> ipopt_app_;
+  int /*Ipopt::ApplicationReturnStatus*/ status_;
 };
 
 } /* namespace ifopt */

@@ -32,6 +32,7 @@ namespace ifopt {
 IpoptSolver::IpoptSolver()
 {
   ipopt_app_ = std::make_shared<Ipopt::IpoptApplication>();
+  status_ = Ipopt::Solve_Succeeded;
 
   /* Which linear solver to use. Mumps is default because it comes with the
    * precompiled ubuntu binaries. However, the coin-hsl solvers can be
@@ -64,7 +65,7 @@ IpoptSolver::Solve (Problem& nlp)
 {
   using namespace Ipopt;
 
-  ApplicationReturnStatus status_ = ipopt_app_->Initialize();
+  status_ = ipopt_app_->Initialize();
   if (status_ != Solve_Succeeded) {
     std::cout << std::endl << std::endl << "*** Error during initialization!" << std::endl;
     throw std::length_error("Ipopt could not initialize correctly");
