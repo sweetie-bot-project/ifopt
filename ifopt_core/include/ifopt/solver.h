@@ -53,8 +53,9 @@ public:
 
   /** @brief  Uses a specific solver (IPOPT, SNOPT) to solve the NLP.
     * @param [in/out]  nlp  The nonlinear programming problem.
+	* @returnfalse if solution is not found. For more information inspect solver specific return codes.
     */
-  virtual void Solve(Problem& nlp) = 0;
+  virtual bool Solve(Problem& nlp) = 0;
 };
 
 } /* namespace ifopt */

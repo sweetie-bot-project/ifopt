@@ -41,11 +41,26 @@ class SnoptSolver : public Solver {
 public:
   using Ptr = std::shared_ptr<SnoptSolver>;
 
+  SnoptSolver() : INFO_(0) {}
+
   /**
    * @brief Creates a snoptProblemA from @a nlp and solves it.
    * @param [in/out]  nlp  The specific problem to be used and modified.
    */
   void Solve(Problem& nlp) override ;
+
+  /** Get SNOPT INFO code of the last operation.
+   * https://tomopt.com/docs/solref/tomlab_sol009.php#htoc137
+   */
+  int GetSnoptInfoCode() { return INFO_; }
+
+  /** Get SNOPT EXIT code of the last operation.
+   * https://tomopt.com/docs/solref/tomlab_sol009.php#htoc137
+   */
+  int GetSnoptExitStatus() { return INFO_ - INFO_%10; }
+
+private:
+  int INFO_; /**< last exit status  */
 };
 
 } /* namespace ifopt */

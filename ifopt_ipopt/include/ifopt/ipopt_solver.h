@@ -57,8 +57,9 @@ public:
 
   /** @brief  Creates an IpoptAdapter and solves the NLP.
     * @param [in/out]  nlp  The specific problem.
+	* $return false is solution not found. For more information inspect IpOpt exit status: @ref GetIpoptExitStatus().
     */
-  void Solve(Problem& nlp) override;
+  bool Solve(Problem& nlp) override;
 
   /** Set options for the IPOPT solver. A complete list can be found here:
     * https://www.coin-or.org/Ipopt/documentation/node40.html
@@ -70,7 +71,7 @@ public:
   /** Get ipopt AplicationReturnStatus of the last operation.
    * https://www.coin-or.org/Ipopt/documentation/node36.html
    */
-  int /*Ipopt::ApplicationReturnStatus*/ getIpoptExitStatus() { return status_; }
+  int /*Ipopt::ApplicationReturnStatus*/ GetIpoptExitStatus() { return status_; }
 
 private:
   std::shared_ptr<Ipopt::IpoptApplication> ipopt_app_;

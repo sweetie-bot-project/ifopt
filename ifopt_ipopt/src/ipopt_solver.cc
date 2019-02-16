@@ -60,7 +60,7 @@ IpoptSolver::IpoptSolver()
   // SetOption("derivative_test_tol", 1e-3);
 }
 
-void
+bool
 IpoptSolver::Solve (Problem& nlp)
 {
   using namespace Ipopt;
@@ -81,9 +81,9 @@ IpoptSolver::Solve (Problem& nlp)
   status_ = ipopt_app_->OptimizeTNLP(nlp_ptr);
 
   if (status_ != Solve_Succeeded) {
-    std::string msg = "ERROR: Ipopt failed to find a solution. Return Code: " + std::to_string(status_) + "\n";
-    std::cerr << msg;
+    return false;
   }
+  return true;
 }
 
 void
