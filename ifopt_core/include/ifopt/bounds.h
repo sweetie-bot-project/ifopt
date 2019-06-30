@@ -59,6 +59,16 @@ struct Bounds {
     lower_ -= scalar;
     upper_ -= scalar;
   }
+
+  bool contains(double val) const
+  {
+    return val >= lower_ && val <= upper_;
+  }
+
+  bool contains(double val, double tol) const
+  {
+    return val >= lower_-tol && val <= upper_+tol;
+  }
 };
 
 // settings this as signals infinity for IPOPT/SNOPT solvers
