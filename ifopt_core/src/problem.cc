@@ -86,6 +86,16 @@ Problem::SetVariables (const double* x)
 }
 
 double
+Problem::GetCostValue () const
+{
+  VectorXd g = VectorXd::Zero(1);
+  if (HasCostTerms()) {
+    g = costs_.GetValues();
+  }
+  return g(0);
+}
+
+double
 Problem::EvaluateCostFunction (const double* x)
 {
   VectorXd g = VectorXd::Zero(1);
@@ -118,6 +128,12 @@ int
 Problem::GetNumberOfConstraints () const
 {
   return GetBoundsOnConstraints().size();
+}
+
+Problem::VectorXd
+Problem::GetConstraintsValues () const
+{
+  return constraints_.GetValues();
 }
 
 Problem::VectorXd

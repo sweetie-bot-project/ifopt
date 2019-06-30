@@ -165,6 +165,11 @@ public:
   VectorXd GetVariableValues() const;
 
   /**
+   * @brief The scalar cost for current optimization variables.
+   */
+  double GetCostValue () const;
+
+  /**
    * @brief The scalar cost for current optimization variables @c x.
    */
   double EvaluateCostFunction(const double* x);
@@ -183,6 +188,11 @@ public:
    * @brief The upper and lower bound of each individual constraint.
    */
   VecBound GetBoundsOnConstraints() const;
+
+  /**
+   * @brief Each constraint value g(x) for current optimization variables.
+   */
+  VectorXd GetConstraintsValues() const;
 
   /**
    * @brief Each constraint value g(x) for current optimization variables @c x.
