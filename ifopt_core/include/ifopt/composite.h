@@ -224,7 +224,9 @@ template<typename T>
 std::shared_ptr<T> Composite::GetComponent(const std::string& name) const
 {
   Component::Ptr c = GetComponent(name);
-  return std::dynamic_pointer_cast<T>(c);
+  auto ptr = std::dynamic_pointer_cast<T>(c);
+  assert(ptr);
+  return ptr;
 }
 
 
